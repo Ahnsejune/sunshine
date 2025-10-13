@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>선샤인 세차 | 새벽에 찾아오는 프리미엄 관리</title>
+  <meta name="description" content="새벽 전용 방문 손세차 서비스 — 꼼꼼함이 차별화되는 프리미엄 관리. 매트 청소, 벌레 제거, 기스 최소화, 타이어·휠 안전 점검까지." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f8f8f8;
+      --text: #000000;
+      --muted: #555555;
+      --line: #e6e6e6;
+      --blue: #2a7fff; /* 포인트 블루 */
+      --green: #22d3a6; /* 포인트 그린 */
+      --accent: #22d3a6; /* 보조 그린 */
+      --shadow: 0 6px 24px rgba(0,0,0,.08);
+      --radius: 20px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: 'Pretendard', system-ui, -apple-system, Segoe UI, Roboto, Noto Sans KR, sans-serif; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container { width: min(1200px, 92%); margin: 0 auto; }
+
+    /* 헤더 */
+    header { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(1.2) blur(10px); background: rgba(255,255,255,.9); border-bottom: 1px solid var(--line); }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .brand { display:flex; gap: 10px; align-items:center; font-weight: 800; letter-spacing:.2px; }
+    .brand .logo { width: 36px; height: 36px; border-radius: 12px; background: linear-gradient(135deg, var(--blue), var(--green)); display:grid; place-items:center; box-shadow: var(--shadow); }
+    .brand .logo svg { filter: drop-shadow(0 4px 12px rgba(42,127,255,.35)); }
+    .nav a { opacity: .9; }
+    .nav-cta { display: flex; gap: 12px; align-items:center; }
+    .btn { display: inline-flex; align-items:center; gap:10px; padding: 12px 16px; border-radius: 14px; border: 1px solid var(--line); background: #ffffff; transition: .25s ease; font-weight: 700; color: var(--text); }
+    .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+    .btn.primary { background: linear-gradient(135deg, var(--blue), var(--green)); color: #ffffff; border: 0; }
+
+    /* 히어로 */
+    .hero { position: relative; overflow: clip; }
+    .hero-wrap { position: relative; padding: clamp(80px, 10vw, 160px) 0 80px; }
+    .hero h1 { font-size: clamp(28px, 4.2vw, 52px); line-height: 1.1; margin: 0 0 18px; font-weight: 900; letter-spacing: -0.02em; color: var(--text); }
+    .hero p.lead { color: var(--muted); font-size: clamp(16px, 2vw, 18px); margin: 0 0 28px; }
+    .badge { display: inline-flex; align-items:center; gap: 10px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 999px; background: rgba(0,0,0,.04); color: var(--muted); margin-bottom: 14px; }
+    .badge b { color: var(--accent); }
+
+    .hero-visual { position: absolute; inset: 0; z-index: -1; }
+    .glow { display:none; }
+    .grid { display:none; }
+
+    .hero-cta { display:flex; gap:14px; flex-wrap: wrap; }
+    .hero .meta { display:flex; gap:14px; margin-top:14px; flex-wrap: wrap; color: var(--muted); font-size: 14px; }
+    .meta .chip { border:1px solid var(--line); padding:8px 12px; border-radius: 999px; background: rgba(0,0,0,.03); }
+
+    /* 섹션 */
+    section { padding: 80px 0; border-top: 1px solid var(--line); background: var(--bg); }
+    section:nth-of-type(even) { background: var(--bg-soft); }
+    .section-title { display:flex; align-items: end; justify-content: space-between; gap:20px; margin-bottom: 26px; }
+    .section-title h2 { font-size: clamp(22px, 3vw, 32px); margin:0; letter-spacing:-.02em; color: var(--text); }
+    .section-title p { color: var(--muted); margin:0; }
+
+    /* 서비스 소개 */
+    .features { display:grid; grid-template-columns: repeat(12, 1fr); gap:18px; }
+    .feature { grid-column: span 6; border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; background: #ffffff; position: relative; overflow:hidden; }
+    .feature:after { content:""; position:absolute; inset: -40% auto auto -40%; width: 180px; height: 180px; background: radial-gradient(closest-side, rgba(42,127,255,.10), transparent); transform: rotate(25deg); }
+    .feature h3 { margin: 0 0 6px; font-size: 18px; color: var(--text); }
+    .feature p { margin: 0; color: var(--muted); }
+    .feature .time { color: var(--accent); font-weight: 800; }
+    @media (max-width: 900px) { .feature { grid-column: span 12; } }
+
+    /* 비교 강조 스트립 */
+    .compare { display:flex; gap: 12px; flex-wrap: wrap; align-items:center; justify-content:center; background: linear-gradient(90deg, rgba(42,127,255,.06), rgba(34,211,166,.06)); padding: 16px; border:1px solid var(--line); border-radius: var(--radius); }
+    .compare b { color: var(--accent); }
+
+    /* 가격 표 */
+    .pricing { display:grid; grid-template-columns: repeat(12, 1fr); gap: 18px; }
+    .price { grid-column: span 4; border:1px solid var(--line); border-radius: var(--radius); background: #ffffff; box-shadow: var(--shadow); position:relative; overflow:hidden; }
+    .price .ribbon { position:absolute; top:16px; right:-40px; transform: rotate(25deg); background: linear-gradient(135deg, var(--blue), var(--green)); color:#ffffff; font-weight:900; padding: 6px 56px; font-size:12px; }
+    .price header { padding: 22px; border-bottom:1px solid var(--line); background: #fafafa; }
+    .price h3 { margin:0 0 4px; color: var(--text); }
+    .price .desc { margin:0; color: var(--muted); font-size: 14px; }
+    .price .body { padding: 22px; }
+    .price .num { font-size: 34px; font-weight: 900; margin: 6px 0 14px; letter-spacing:-.02em; color: var(--text); }
+    .price ul { list-style:none; padding:0; margin:0; display:grid; gap:10px; color: var(--muted); }
+    .price .cta { padding: 22px; }
+    .price .cta .btn { width: 100%; justify-content:center; }
+
+    @media (max-width: 900px) { .price { grid-column: span 12; } }
+
+    /* 전후 갤러리 */
+    .gallery { display:grid; grid-template-columns: repeat(12, 1fr); gap: 18px; }
+    .shot { grid-column: span 6; background: #ffffff; border: 1px solid var(--line); border-radius: var(--radius); overflow: clip; }
+    .shot .ph { height: 240px; background: linear-gradient(135deg, rgba(42,127,255,.08), rgba(34,211,166,.06)); display:grid; place-items:center; color: var(--muted); }
+    .shot footer { display:flex; justify-content:space-between; align-items:center; padding: 12px 16px; border-top:1px solid var(--line); color: var(--muted); }
+    @media (max-width: 900px) { .shot { grid-column: span 12; } }
+
+    /* USP */
+    .usps { display:grid; grid-template-columns: repeat(12, 1fr); gap: 18px; }
+    .usp { grid-column: span 3; border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; background: #ffffff; display:grid; gap: 10px; }
+    .usp .icon { width: 40px; height: 40px; border-radius: 12px; background: rgba(42,127,255,.10); display:grid; place-items:center; }
+    .usp p { margin:0; color: var(--muted); }
+    @media (max-width: 900px) { .usp { grid-column: span 12; } }
+
+    /* 이벤트 */
+    .promo { display:grid; grid-template-columns: repeat(12, 1fr); gap: 18px; }
+    .deal { grid-column: span 6; border:1px solid var(--line); border-radius: var(--radius); padding: 22px; background: linear-gradient(180deg, rgba(42,127,255,.08), rgba(34,211,166,.05)); position:relative; overflow:hidden; }
+    .deal .tag { position:absolute; right:16px; top:16px; font-size:12px; padding:6px 10px; border-radius:999px; background:#ffffff; border:1px solid var(--line); color: var(--accent); }
+    .deal h3 { margin:0 0 8px; color: var(--text); }
+    .deal p { margin:0; color: var(--muted); }
+    @media (max-width: 900px) { .deal { grid-column: span 12; } }
+
+    /* 예약/문의 */
+    .contact { display:grid; grid-template-columns: repeat(12, 1fr); gap: 18px; }
+    .card { grid-column: span 6; border:1px solid var(--line); border-radius: var(--radius); padding: 22px; background: #ffffff; }
+    .card h3 { margin:0 0 8px; color: var(--text); }
+    .card p { margin:0 0 12px; color: var(--muted); }
+    .inline { display:flex; gap: 10px; flex-wrap: wrap; }
+    @media (max-width: 900px) { .card { grid-column: span 12; } }
+
+    /* 푸터 */
+    footer { padding: 40px 0 80px; border-top:1px solid var(--line); color: var(--muted); text-align:center; background: var(--bg-soft); }
+
+    /* 스크롤 애니메이션 */
+    .reveal { opacity: 0; transform: translateY(14px); transition: .8s ease; }
+    .reveal.on { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+  <!-- 헤더 -->
+  <header>
+    <div class="container nav">
+      <a href="#home" class="brand">
+        <span class="logo" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 3v18M3 12h18" stroke="#04101a" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span>선샤인 세차</span>
+      </a>
+      <nav class="nav-cta"><a href="#payment" class="btn">무통장 입금</a>
+        <a href="#pricing" class="btn">가격 안내</a>
+        <a href="#contact" class="btn primary">예약하기</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 히어로 -->
+  <section id="home" class="hero">
+    <div class="hero-visual" aria-hidden="true">
+      <div class="glow" style="transform: translateY(var(--parallax,0px));"></div>
+      <div class="grid"></div>
+    </div>
+    <div class="container hero-wrap">
+      <div class="badge">새벽 전용 방문 손세차 · <b>22:00~06:00</b> 운영</div>
+      <h1>새벽에 찾아오는 <span style="background:linear-gradient(135deg,var(--blue),var(--green)); -webkit-background-clip:text; background-clip:text; color:transparent;">프리미엄 관리</span>,<br/>꼼꼼함이 차별화되는 선샤인 세차</h1>
+      <p class="lead">실내 지하주차장 방문 서비스 · 매트 청소 · 벌레 제거 · 기스 최소화 · 타이어·휠 안전 점검</p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn primary">지금 예약하기</a>
+        <a href="tel:010-0000-0000" class="btn" aria-label="전화문의">전화문의 010-0000-0000</a>
+      </div>
+      <div class="meta">
+        <span class="chip">상위 20% 프리미엄 관리</span>
+        <span class="chip">손세차 + 내부 청소 포함</span>
+        <span class="chip">안전 점검 포함</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 서비스 소개 -->
+  <section id="service">
+    <div class="container">
+      <div class="section-title">
+        <h2>서비스 소개</h2>
+        <p>손세차 + 내부 청소 포함 · 지하주차장 방문</p>
+      </div>
+
+      <div class="features reveal">
+        <div class="feature">
+          <h3>프리미엄 손세차</h3>
+          <p>고급 용품 사용으로 <b class="time">기스 최소화</b> 및 도장 보호.</p>
+        </div>
+        <div class="feature">
+          <h3>내부 청소 & 매트 케어</h3>
+          <p>매트 탈거·세척, 실내 먼지 제거로 <b>깔끔한 컨디션</b> 유지.</p>
+        </div>
+        <div class="feature">
+          <h3>벌레/이물질 제거</h3>
+          <p>전면부·사이드의 이물질을 안전하게 제거해 광택 유지.</p>
+        </div>
+        <div class="feature">
+          <h3>타이어·휠 안전 점검</h3>
+          <p>기본 안전 상태 확인 및 간단 점검 포함.</p>
+        </div>
+      </div>
+
+      <div class="compare reveal" style="margin-top:18px">
+        <span>경쟁사 대비 <b>30~50분</b> 꼼꼼 청소 · (일반 5~10분)</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 전후 갤러리 -->
+  <section id="gallery">
+    <div class="container">
+      <div class="section-title">
+        <h2>전후 사진 갤러리</h2>
+        <p>실제 세차 전·후 이미지를 주기적으로 업데이트</p>
+      </div>
+
+      <div class="gallery reveal">
+        <article class="shot">
+          <div class="ph">여기에 ‘전’ 이미지</div>
+          <footer><span>전(세차 전)</span><span>예시 사진</span></footer>
+        </article>
+        <article class="shot">
+          <div class="ph">여기에 ‘후’ 이미지</div>
+          <footer><span>후(세차 후)</span><span>예시 사진</span></footer>
+        </article>
+        <article class="shot">
+          <div class="ph">여기에 ‘전’ 이미지</div>
+          <footer><span>전(세차 전)</span><span>예시 사진</span></footer>
+        </article>
+        <article class="shot">
+          <div class="ph">여기에 ‘후’ 이미지</div>
+          <footer><span>후(세차 후)</span><span>예시 사진</span></footer>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- USP -->
+  <section id="usp">
+    <div class="container">
+      <div class="section-title">
+        <h2>차별화 포인트</h2>
+        <p>꼼꼼함이 차이를 만듭니다</p>
+      </div>
+
+      <div class="usps reveal">
+        <div class="usp">
+          <div class="icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 13l4 4L20 5" stroke="#2a7fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>내부 매트 청소</h3>
+          <p>탈거·세척으로 미세먼지까지 관리.</p>
+        </div>
+        <div class="usp">
+          <div class="icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2v20M2 12h20" stroke="#2a7fff" stroke-width="3" stroke-linecap="round"/></svg>
+          </div>
+          <h3>벌레/이물질 제거</h3>
+          <p>페인트 손상 없이 안전한 제거 방식.</p>
+        </div>
+        <div class="usp">
+          <div class="icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="#2a7fff" stroke-width="3"/><path d="M7 12l3 3 7-7" stroke="#2a7fff" stroke-width="3"/></svg>
+          </div>
+          <h3>기스 방지 고급 용품</h3>
+          <p>도장면 보호에 최적화된 용품 사용.</p>
+        </div>
+        <div class="usp">
+          <div class="icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h18M12 3v18" stroke="#2a7fff" stroke-width="3"/></svg>
+          </div>
+          <h3>타이어·휠 안전 점검</h3>
+          <p>마모·이물 상태 간단 체크 포함.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 이벤트/혜택 -->
+  <section id="promo">
+    <div class="container">
+      <div class="section-title">
+        <h2>이벤트 & 혜택</h2>
+        <p>오픈 기념 한정 혜택을 잡으세요</p>
+      </div>
+
+      <div class="promo reveal">
+        <article class="deal">
+          <span class="tag">오픈 이벤트</span>
+          <h3>지인찬스! 선착순 50명 무료 세차 1회권</h3>
+          <p>지인에게만 드리는 특별 혜택. 조기 마감될 수 있습니다.</p>
+        </article>
+        <article class="deal">
+          <span class="tag">추천 이벤트</span>
+          <h3>지인 소개 시 <b>5,000원 쿠폰</b> 지급</h3>
+          <p>현금처럼 사용 가능한 쿠폰. 예약 시 자동 적용(예정).</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 예약/문의 -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-title">
+        <h2>예약 & 문의</h2>
+        <p>전화 예약 우선 · 추후 카카오채널 & 웹 예약 예정</p>
+      </div>
+
+      <div class="contact reveal">
+        <div class="card">
+          <h3>전화 예약</h3>
+          <p>운영 시간: 22:00 ~ 06:00 (새벽 전용)</p>
+          <div class="inline">
+            <a href="tel:010-0000-0000" class="btn primary">전화하기 010-0000-0000</a>
+            <a href="#" class="btn" aria-disabled="true">카카오채널 (준비중)</a>
+          </div>
+        </div>
+        <div class="card">
+          <h3>웹 예약 (예정)</h3>
+          <p>선호 요일·시간, 차량 종류를 선택하고 간편하게 예약하세요.</p>
+          <div class="inline">
+            <a href="#" class="btn" aria-disabled="true">웹 예약 열람 (준비중)</a>
+            <a href="#pricing" class="btn">가격 보기</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 가격 안내 -->
+  <section id="pricing">
+    <div class="container">
+      <div class="section-title">
+        <h2>가격 안내 <span style="font-size:14px; color:var(--muted); font-weight:600;">월 4회(내부 1회 포함)</span></h2>
+        <p>부가 옵션/추가 요청 시 별도 협의</p>
+      </div>
+
+      <div class="pricing reveal">
+        <article class="price">
+          <div class="ribbon">베스트</div>
+          <header>
+            <h3>중/소형차</h3>
+            <p class="desc">세단 · 소형 SUV</p>
+          </header>
+          <div class="body">
+            <div class="num">60,000원</div>
+            <ul>
+              <li>월 4회 방문 (내부 1회 포함)</li>
+              <li>매트 청소 / 벌레 제거</li>
+              <li>기스 최소화 고급 용품</li>
+            </ul>
+          </div>
+          <div class="cta">
+            <a href="#contact" class="btn primary">이 구독으로 예약</a>
+          </div>
+        </article>
+
+        <article class="price">
+          <header>
+            <h3>대형/수입차</h3>
+            <p class="desc">준대형 · 수입 세단</p>
+          </header>
+          <div class="body">
+            <div class="num">70,000원</div>
+            <ul>
+              <li>월 4회 방문 (내부 1회 포함)</li>
+              <li>매트 청소 / 벌레 제거</li>
+              <li>타이어·휠 안전 점검</li>
+            </ul>
+          </div>
+          <div class="cta">
+            <a href="#contact" class="btn primary">이 구독으로 예약</a>
+          </div>
+        </article>
+
+        <article class="price">
+          <header>
+            <h3>중·대형 SUV</h3>
+            <p class="desc">국산·수입 SUV</p>
+          </header>
+          <div class="body">
+            <div class="num">75,000원</div>
+            <ul>
+              <li>월 4회 방문 (내부 1회 포함)</li>
+              <li>벌레/이물질 집중 케어</li>
+              <li>기스 방지 고급 용품</li>
+            </ul>
+          </div>
+          <div class="cta">
+            <a href="#contact" class="btn primary">이 구독으로 예약</a>
+          </div>
+        </article>
+      </div>
+    </div>
+
+  <!-- 결제(무통장 입금) -->
+  <section id="payment">
+    <div class="container">
+      <div class="section-title">
+        <h2>결제 안내 (무통장 입금)</h2>
+        <p>입금 확인 후 예약이 최종 확정됩니다</p>
+      </div>
+
+      <div class="contact reveal">
+        <div class="card">
+          <h3>입금 계좌</h3>
+          <p>아래 정보를 복사해 입금해 주세요.</p>
+          <ul style="margin:0; padding-left:18px; color: var(--muted); line-height:1.9;">
+            <li><b style="color:var(--text);">은행명</b> : <span>국민은행</span></li>
+            <li><b style="color:var(--text);">예금주</b> : <span>선샤인세차</span></li>
+            <li><b style="color:var(--text);">계좌번호</b> : <span>000000-00-000000</span></li>
+            <li><b style="color:var(--text);">입금액</b> : <span>예정 금액(예: 60,000원)</span></li>
+            <li><b style="color:var(--text);">입금자명</b> : <span>예약자명과 동일하게</span></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>유의 사항</h3>
+          <ul style="margin:0; padding-left:18px; color: var(--muted); line-height:1.9;">
+            <li>입금기한: 예약 후 <b style="color:var(--text);">24시간 이내</b> (기한 내 미입금 시 자동 취소될 수 있습니다)</li>
+            <li>입금 확인: <b style="color:var(--text);">카카오채널/문자</b>로 확정 안내를 드립니다</li>
+            <li>현금영수증/세금계산서 발행 가능 (요청 시 사업자 등록번호 기재)</li>
+            <li>환불 안내: 일정 변경은 <b style="color:var(--text);">전일 18시</b>까지 무상, 이후에는 일부 차감될 수 있습니다</li>
+          </ul>
+          <div class="inline" style="margin-top:12px;">
+            <a href="#contact" class="btn">문의하기</a>
+            <a href="#pricing" class="btn">가격 다시 보기</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</section>
+  <footer>
+    <div class="container">
+      <p><b>선샤인 세차</b> · 새벽 전용 방문 손세차 서비스</p>
+      <p>© <span id="year"></span> Sunshine Wash. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // 현재 연도 표기
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Parallax 효과 (히어로 배경 글로우) — 화이트 테마에서는 glow를 숨김 처리했으므로 변수만 유지
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      const amt = Math.min(80, y * 0.15);
+      document.documentElement.style.setProperty('--parallax', amt + 'px');
+    });
+
+    // 스크롤 리빌
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
+    }, { threshold: .18 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>
